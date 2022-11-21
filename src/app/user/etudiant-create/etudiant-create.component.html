@@ -1,0 +1,108 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand>
+    <h1 class="navbar-brand">Utilisateur {{currentUsername}}</h1>
+  </mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin" routerLinkActive="active" >Espace Admin</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/users" routerLinkActive="active" >Gestion des utilisateurs</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="cog"></mdb-icon> Settings</a>
+      </li>
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect (click)="details()" >My account</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/admin" (click)="logout()">Log out</a>
+        </div>
+      </li>
+
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+<br>
+
+
+<section style="width: 35%; margin-left: 32.5%; margin-top: 5%;">
+
+  <!-- Material form login -->
+  <div class="card">
+
+    <h1 class="card-header info-color white-text text-center py-4">
+      <strong>Creation d'un Admin</strong>
+    </h1>
+
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+
+      <!-- Form -->
+      <form class="text-center" style="color: #757575;" [formGroup]="CreateForm" (ngSubmit)="onSubmit()">
+
+        <div style="text-align: left;">
+          <label for="FirstName">FirstName</label>
+          <input type="text" formControlName="FirstName" id="FirstName" class="form-control"/>
+
+        </div>
+        <br/>
+        <div style="text-align: left;">
+          <label for="LastName">LastName</label>
+          <input type="text" formControlName="LastName" id="LastName" class="form-control"/>
+
+        </div>
+        <br/>
+        <div style="text-align: left;">
+          <label for="email">E-mail</label>
+          <input type="email" formControlName="email" id="email" class="form-control"/>
+
+        </div>
+        <br/>
+        <div style="text-align: left;">
+          <label for="password" >Password</label>
+          <input type="password" formControlName="password" id="password"
+          class="form-control" placeholder="ecrire un mot de passe seulement si vous voulez changer l'ancient"/>
+        </div>
+        <br>
+        <button class="switchBtn" id="admin" (click)="setAdmin()" type="button">Admin</button>
+        <button class="switchBtn" id="etu" (click)="setEtu()" type="button">Etudiant</button>
+        <br>
+        <div *ngIf="switchIsStudent;else elseBlock"></div>
+        <ng-template #elseBlock>
+          <br>
+          <select name="promotions" id="selectedPromo" #promos (change)="onSelected(promos.value)">
+            <option value="0">Selectionez une promotion</option>
+            <option id ="PromoValue" value="{{p.id}}" *ngFor="let p of promotions">{{p.titreProfessionnelTitre}} à {{p.villeNom}}<br>
+              du {{p.dateDebut}} au {{p.dateFin}}</option>
+          </select>
+        </ng-template>
+
+
+        <!-- Sign in button -->
+        <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" style="border-radius: 10em;"
+        type="submit">Create</button>
+
+        <!--<div *ngIf="error"></div>-->
+      </form>
+    </div>
+  </div>
+</section>
+

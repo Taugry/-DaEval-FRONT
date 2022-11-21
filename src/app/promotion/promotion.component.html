@@ -1,0 +1,56 @@
+<app-menu-nav-bar></app-menu-nav-bar>
+<br>
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <label for="searchExpression">Recherche : </label>
+  <input id="searchExpression" type="text" formControlName="searchExpression" />
+  <button type="submit" >Rechercher</button>
+  <button type="button" (click)="getPromotionList()" >Annuler</button>
+</form>
+
+<button mat-raised-button class="matButton" (click)="createPromotion()">Crée une Promotion</button>
+
+
+  <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date Debut</th>
+          <th>Date Fin</th>
+          <th>Titre Professionnel associé</th>
+          <th>Ville associé</th>
+          <th>Etudiants associé</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="Promotions; else noVille">
+        <tr *ngFor="let p of Promotions | paginate: {itemsPerPage:itemsPerPage, currentPage: currentPage, totalItems:totalItems}">
+          <td>{{p.dateDebut}}</td>
+          <td>{{p.dateFin}}</td>
+          <td>{{p.titreProfessionnelTitre}}</td>
+          <td>{{p.villeNom}}</td>
+          <td>{{p.etudiants}}</td>
+          <!-- <td>
+            <tr *ngFor="let e if p.etudiants">
+              <p style="color: red">{{e.firstName}} {{e.lastName}}</p>
+            </tr>
+          </td> -->
+          <td>
+            <button class="BtnIcon" (click)="viewPromotionDetails(p)">
+              <mat-icon>remove_red_eye</mat-icon>
+            </button>
+            <button class="BtnIcon" (click)="detailsPromotion(p.id)">
+              <mat-icon>build</mat-icon>
+            </button>
+            <button class="BtnIcon" style="color: red;" (click)="deletePromotion(p)">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+  <ng-template #noVille>
+      <span class="text-danger">Aucune ville trouvé !</span>
+  </ng-template>
+  <pagination-controls *ngIf="Promotions"
+                      (pageChange)="pageChanged($event)"
+                      previousLabel="Précédent"
+                      nextLabel="Suivant"></pagination-controls>

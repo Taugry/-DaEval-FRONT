@@ -1,0 +1,25 @@
+<div class="content-container">
+  <div class="card">
+
+    <h1 class="card-header info-color white-text text-center">
+      <strong>Visualisation de la ville &nbsp; &nbsp;</strong>
+      <mat-icon id="close-icon" style="color: red" (click)="closeDialog()">close</mat-icon>
+    </h1>
+
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+        <div style="text-align: left;">
+          <label>Nom :</label>
+          <br>
+          <input type="text" readonly="readonly" placeholder={{data.ville.nom}}>
+        </div>
+        <br/>
+        <div style="text-align: left;">
+          <label>Slug :</label>
+          <br>
+          <input type="text" readonly="readonly" placeholder={{data.ville.slug}}>
+        </div>
+    </div>
+  </div>
+
+</div>

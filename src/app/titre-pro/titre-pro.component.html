@@ -1,0 +1,48 @@
+<app-menu-nav-bar></app-menu-nav-bar>
+<br>
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <label for="searchExpression">Recherche : </label>
+  <input id="searchExpression" type="text" formControlName="searchExpression" />
+  <button type="submit" >Rechercher</button>
+  <button type="button" (click)="getTitreProList()" >Annuler</button>
+</form>
+
+<button mat-raised-button class="matButton" (click)="createTirePro()">Crée titre professionnel</button>
+
+
+  <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nom de la ville</th>
+          <th>titre</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="titrepros; else noVille">
+        <tr *ngFor="let tps of titrepros | paginate: {itemsPerPage:itemsPerPage, currentPage: currentPage, totalItems:totalItems}">
+          <td>{{tps.titre}}</td>
+          <td>
+            <button class="BtnIcon" (click)="viewTireProDetails(tps)">
+              <mat-icon>remove_red_eye</mat-icon>
+            </button>
+            <button class="BtnIcon" (click)="detailsTirePro(tps.id)">
+              <mat-icon>build</mat-icon>
+            </button>
+            <button class="BtnIcon" (click)="GeneratePDF(tps.id)">
+              <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+            <button class="BtnIcon" style="color: red;" (click)="deleteTirePro(tps.id,tps.titre)">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+  <ng-template #noVille>
+      <span class="text-danger">Aucune ville trouvé !</span>
+  </ng-template>
+  <pagination-controls *ngIf="titrepros"
+                      (pageChange)="pageChanged($event)"
+                      previousLabel="Précédent"
+                      nextLabel="Suivant"></pagination-controls>
+
+

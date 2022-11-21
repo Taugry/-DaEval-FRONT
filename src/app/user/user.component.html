@@ -1,0 +1,88 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand>
+    <h1 class="navbar-brand">Gestion des utilisateurs</h1>
+  </mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin" routerLinkActive="active" >Espace Admin</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="cog"></mdb-icon> Settings</a>
+      </li>
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect (click)="details()" >My account</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/admin" (click)="logout()">Log out</a>
+        </div>
+      </li>
+
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+<br>
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <label for="searchExpression">Recherche : </label>
+  <input id="searchExpression" type="text" formControlName="searchExpression" />
+  <button type="submit" >Rechercher</button>
+  <button type="button" (click)="getUsersList()" >Annuler</button>
+</form>
+
+<button mat-raised-button class="matButton" (click)="createUser()">Crée utilisateur</button>
+
+
+  <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nom complet</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actif ?</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="users; else noUsers">
+        <tr *ngFor="let u of users | paginate: {itemsPerPage:itemsPerPage, currentPage: currentPage, totalItems:totalItems}">
+          <td>{{u.firstName}} {{u.lastName}}</td>
+          <td>{{u.email}}</td>
+          <td>{{u.role}}</td>
+          <td class="TrueActive" *ngIf="u.active; else endBlock"></td>
+          <ng-template #endBlock><td class="FalseActive"></td></ng-template>
+          <td>
+            <button class="BtnIcon" (click)="detailNoEdit(u)">
+              <mat-icon>remove_red_eye</mat-icon>
+            </button>
+            <button class="BtnIcon" (click)="detailTarget(u.id)">
+              <mat-icon>build</mat-icon>
+            </button>
+            <button class="BtnIcon" style="color: red;" (click)="deleteUser(u.id,u.firstName)">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+  <ng-template #noUsers>
+      <span class="text-danger">Aucun utilisateur trouvé !</span>
+  </ng-template>
+  <pagination-controls *ngIf="users"
+                      (pageChange)="pageChanged($event)"
+                      previousLabel="Précédent"
+                      nextLabel="Suivant"></pagination-controls>

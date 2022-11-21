@@ -1,0 +1,31 @@
+table{
+  text-align: center;
+}
+.TrueActive{
+  background-color:green;
+  text-align:center;
+  color:aliceblue;
+}
+.FalseActive{
+  background-color:red;
+  text-align:center;
+  color:aliceblue;
+}
+.BtnIcon{
+  all: unset;
+  cursor: pointer;
+}
+.BtnIcon:hover{
+  all: unset;
+  cursor: pointer;
+}
+.matButton {
+  color: black;
+  background-color: #00ff00;
+  border-radius: 6px;
+  border: none;
+}
+.matButton:active {
+  background-color: #39FF14;
+  transform: translateX(5px);
+}

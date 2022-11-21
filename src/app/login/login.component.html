@@ -1,0 +1,57 @@
+<!--<h1>Authentification</h1>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <label for="email">Email : </label>
+  <input type="email" formControlName="email" id="email"/>
+  <br />
+  <label for="password">Password : </label>
+  <input type="password" formControlName="password" id="password" />
+  <br />
+  <button>
+    Se connecter
+  </button>
+  <div *ngIf="error">{{error}}</div>
+</form>-->
+
+
+<section style="width: 25%; margin-left: 37.5%; margin-top: 10%;">
+
+  <!-- Material form login -->
+  <div class="card">
+
+    <h1 class="card-header info-color white-text text-center py-4">
+      <strong>Authentification</strong>
+    </h1>
+
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+
+      <!-- Form -->
+      <form class="text-center" style="color: #757575;" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <!-- Email -->
+        <div style="text-align: left;">
+          <label for="email">E-mail</label>
+          <input type="email" formControlName="email" id="email" class="form-control"/>
+
+        </div>
+        <br/>
+        <!-- Password -->
+        <div style="text-align: left;">
+          <label for="password" >Password</label>
+          <input type="password" formControlName="password" id="password" class="form-control"/>
+
+        </div>
+
+        <!-- Sign in button -->
+        <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" style="border-radius: 10em;"
+        type="submit">Se connecter</button>
+
+        <!-- Register -->
+        <p>Pas de compte ?
+          <a href="">S'enregistrer</a>
+        </p>
+        <div *ngIf="error"></div>
+      </form>
+    </div>
+  </div>
+</section>

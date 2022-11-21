@@ -1,0 +1,28 @@
+.switchBtn {
+  width: 115px;
+  height: 52px;
+	border-radius:28px;
+  border: none;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	text-decoration:none;
+  padding: 0,0,0,0;
+}
+.switchBtn#admin{
+	background-color:red;
+  margin-right: 50px;
+}
+.switchBtn#etu{
+  background-color: blue;
+}
+.switchBtn#etu:hover{
+  background-color: #3a3aff;
+}
+.switchBtn#admin:hover{
+  background-color: crimson;
+}
+.switchBtn:active {
+	position:relative;
+	top:2px;
+}

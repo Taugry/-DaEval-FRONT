@@ -1,0 +1,47 @@
+<div class="content-container">
+  <div class="card">
+
+    <h1 class="card-header info-color white-text text-center">
+      <strong>Visualisation de l'utilisateur &nbsp; &nbsp;</strong>
+      <mat-icon id="close-icon" style="color: red" (click)="closeDialog()">close</mat-icon>
+    </h1>
+
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+        <div style="text-align: left;">
+          <label>FirstName :</label>
+          <br>
+          <input type="text" readonly="readonly" placeholder={{data.user.firstName}}>
+        </div>
+        <br/>
+        <div style="text-align: left;">
+          <label>LastName :</label>
+          <br>
+          <input type="text" readonly="readonly" placeholder={{data.user.lastName}}>
+        </div>
+        <br/>
+        <div style="text-align: left;">
+          <label>E-mail :</label>
+          <br>
+          <input type="text" readonly="readonly" placeholder={{data.user.email}}>
+        </div>
+        <br/>
+        <div style="text-align: left;">
+          <label>Actif ?</label>
+          <br>
+          <input *ngIf="data.user.active; else endBlock"
+            style="background-color: lightgreen; color: black;" readonly="readonly" placeholder="OUI">
+          <ng-template #endBlock>
+          <input style="background-color: red; color: whiteblack;"
+            readonly="readonly" placeholder="NON"></ng-template>
+        </div>
+        <br/>
+        <div style="text-align: left;">
+          <label>Role :</label>
+          <br>
+          <input type="text" readonly="readonly" placeholder={{data.user.role}}>
+        </div>
+    </div>
+  </div>
+
+</div>
